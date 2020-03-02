@@ -1,4 +1,4 @@
-Yeast genome analysis pipeline\* used in *Heron Hilário* PhD Thesis
+Yeast genome analysis pipeline\* used in *Heron Hilário* PhD Dissertation
 ================
 Heron O. Hilário
 15/03/2020
