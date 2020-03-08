@@ -4,63 +4,63 @@ Heron O. Hilário
 15/03/2020
 
 # Assembly
+## reads quality assessment and trimming
+### FastQC for visualization of reads quality
 
-``` r
-cat("teste")
+*M. australis* WGS reads from MiSeq and HiSeq platforms
+``` bash
+fastqc -f fastq -o . aus_miseq_001.fastq aus_miseq_002.fastq aus_hiseq_001.fastq aus_hiseq_002.fastq
 ```
+Open html output on web browser.
 
-    ## teste
+### TRIMMOMATIC for removal of adpter and poor quality reads
+Leaving only reads with phred score above 30
+
+MiSeq reads
+``` bash
+java -jar trimmomatic-0.38.jar PE -phred64 -threads 16 \
+ aus_miseq_001.fastq aus_miseq_002.fastq \
+ aus_miseq_001_P_trim.fastq aus_miseq_001_U_trim.fastq \
+ aus_miseq_002_P_trim.fastq aus_miseq_002_U_trim.fastq \
+ ILLUMINACLIP:$home/Trimmomatic-0.38/adapters/NexteraPE-PE.fa:2:30:30 \
+ LEADING:3 TRAILING:3 SLIDINGWINDOW:5:20 MINLEN:50
+```
+HiSeq reads
+``` bash
+java -jar trimmomatic-0.38.jar PE -phred64 -threads 16 \
+ aus_hiseq_001.fastq aus_hiseq_002.fastq \
+ aus_hiseq_001_P_trim.fastq aus_hiseq_001_U_trim.fastq \
+ aus_hiseq_002_P_trim.fastq aus_hiseq_002_U_trim.fastq \
+ ILLUMINACLIP:$home/Trimmomatic-0.38/adapters/NexteraPE-PE.fa:2:30:30 \
+ LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:50
+```
+### FastQC for visualization of trimmed reads quality
 
 ``` bash
-
-cat /home/heron-oh/metschnikowias/2020/36_metsch_IDs.list
+fastqc -f fastq -o . aus_hiseq_001_P_trim.fastq aus_hiseq_001_U_trim.fastq \
+ aus_hiseq_002_P_trim.fastq aus_hiseq_002_U_trim.fastq \
+ aus_miseq_001_P_trim.fastq aus_miseq_001_U_trim.fastq \
+  aus_miseq_002_P_trim.fastq aus_miseq_002_U_trim.fastq
 ```
+Open html output on web browser.
 
-    ## abe
-    ## ari
-    ## aus
-    ## bic
-    ## bor
-    ## bow
-    ## cer
-    ## cla
-    ## clv
-    ## col
-    ## con
-    ## cos
-    ## cub
-    ## dek
-    ## dra
-    ## flo
-    ## gol
-    ## ham
-    ## haw
-    ## hib
-    ## ipo
-    ## kam
-    ## kip
-    ## loc
-    ## mar
-    ## mat
-    ## mau
-    ## mer
-    ## pal
-    ## pil
-    ## pro
-    ## sce
-    ## shi
-    ## sim
-    ## sma
-    ## tor
+### Genome assembly with SPADES 3.9.0
 
-``` r
-source("FINAL_metsch_pipeline.R")
+``` bash
+spades.py \
+ -k 21,33,55,77 \
+ --careful \
+ -t 64 \
+ --pe1-1 aus_miseq_001_P_trim.fastq \ 
+ --pe1-2 aus_miseq_002_P_trim.fastq \
+ --pe2-1 aus_hiseq_001_P_trim.fastq \
+ --pe2-2 aus_hiseq_002_P_trim.fastq \
+ --s1 aus_miseq_001_P_trim.fastq \
+ --s2 aus_miseq_002_P_trim.fastq \
+ --s3 aus_hiseq_001_U_trim.fastq \
+ --s4 aus_hiseq_002_U_trim.fastq \
+ -o ~/genome_assembly/aus/
 ```
-
-# 1\. Avaliação da qualidade das *reads*
-
-use TRIMOMMATIC to remove low quality reads and trimm low quality
-segments (phred \<30) from sequencer output \# 2.
 
 ## Markdown
 
