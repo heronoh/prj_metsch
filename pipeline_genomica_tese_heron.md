@@ -5,7 +5,10 @@ Heron O. Hilário
 15/03/2020
 
 This pipeline was adapted and complemented from [github.com/sujaikumar/assemblage](http://github.com/sujaikumar/assemblage), 
-customized for *Metschnikowia australis* and other *Metchnikowia* genomes analysis. 
+customized for *Metschnikowia australis* and other *Metchnikowia* genomes analysis performed for my PhD Thesis. 
+
+**NOTE: if you wish to run this pipeline for your genomes it is recommended to use up to date versions of the listed programs.**
+**NOTE2: as my mentor Prof. Thiago Mafra always told me, "RTFM" (Read The Friendly Manual) **
 
 # Assembly
 ## reads quality assessment, trimming and genome assembly
@@ -285,27 +288,24 @@ Use *grep* to count the number of predicted CDSs
 grep -c ">" $genome.all.maker.*.fasta
 ```
 
-
-
-
-### Predicting tRNAs with tRNAscan-SE v1.4
-
+Maker CDSs have long bulky names so they were all renamed on *fasta* and *gff*
 
 
 
 
 
+### Predicting tRNAs with tRNAscan-SE v2.0
 
+Run tRNAscan for eukaryotic RNAs, with general tRNA models and generating summary, structures and sequences files.
 
+``` bash
+mkdir ~/.../tRNAscan_out;
+cd ~/.../tRNAscan_out;
+tRNAscan-SE -E -G -o $genome_trnas -f $genome_trnas_2ndStruc -m $genome_trnas_stats  ~/.../genomes/$genome.fasta
+```
 
+### Functional annotation with InterProScan
 
-
-## Including Plots
-
-You can also embed plots, for
-example:
-
-![](pipeline_genomica_tese_heron_files/figure-gfm/pressure-1.png)<!-- -->
-
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+``` bash
+java -jar interproscan-5.jar --iprlookup -dp  --pathways  --goterms  --input /home/heron-oh/metschnikowias/2018/maker_metsch/2pass/aus/aus.maker.output/aus.all.maker.proteins.fasta  -u /home/heron-oh/metschnikowias/2018/interproscan/aus -f TSV,SVG -b aus -cpu 32
+```
