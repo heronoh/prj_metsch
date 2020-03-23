@@ -1,9 +1,11 @@
-Yeast genome analysis pipeline\* used in *Heron Hilário* PhD Dissertation
+Yeast genome analysis pipeline used in *Heron Hilário* PhD Thesis
 ================
 Heron O. Hilário
 15/03/2020
 
 # Assembly
+
+![grafico](fig/graph_genome_size.svg)
 
 ``` r
 cat("teste")
@@ -60,7 +62,7 @@ source("FINAL_metsch_pipeline.R")
 # 1\. Avaliação da qualidade das *reads*
 
 use TRIMOMMATIC to remove low quality reads and trimm low quality
-segments (phred \<30) from sequencer output \# 2.
+segments (phred \< 30) from sequencer output \# 2.
 
 ## Markdown
 
