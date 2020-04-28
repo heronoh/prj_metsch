@@ -78,7 +78,7 @@ spades.py \
 
 Contig metrics with scaffold_stats.pl by github.com/sujaikumar 
 ``` bash
-scaffold_stats.pl -f aus_contigs.fasta -f 500 1000 -o aus_contigs_stats.txt;
+scaffold_stats.pl -f aus_contigs.fasta -t 500 1000 -o aus_contigs_stats.txt;
 ```
 ### Genome completeness assessment with CEGMA 2.5
 
