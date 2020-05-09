@@ -25,9 +25,18 @@ library("ggrepel")
 #read_csv("/home/heron-oh/metschnikowias/2020/metsch_genomes_IDs.list")
 #geno_names <- readLines("/home/heron-oh/metschnikowias/2020/metsch_genomes_IDs.list")
 
+working_dir <- c("/home/heron-oh/metschnikowias/prj_metsh")
+setwd(working_dir)
+
+
 
 #inicializando as tabelas e variáveis de genomas
-genomes_dir <- c("/home/heron-oh/metschnikowias/2020/genomas/ctgs/")
+
+genomes_dir <- paste0(working_dir,"/data/genomes/ctgs")
+list.files(genomes_dir)
+#genomes_dir <- c("/home/heron-oh/metschnikowias/2020/genomas/ctgs/")
+busco_dir <- paste0(working_dir,"/data/busco/")
+
 busco_dir <- c("/home/heron-oh/metschnikowias/2020/busco/busco_ceta/")
 tRNA_dir <- c("/home/heron-oh/metschnikowias/2020/tRNAscan/")
 interpro_dir <- c("/home/heron-oh/metschnikowias/2020/interproscan/v39/")
@@ -36,6 +45,7 @@ genomes_file <- list.files(genomes_dir)
 genomes_rad <- substr(list.files(genomes_dir), 0,3 )
 genomes_path <- paste0(genomes_dir,genomes_file)
 
+#building genomes_tbl whith columns for all genome informations
 genomes_tbl <- tibble::tibble(genomes_rad,genomes_file,
                               contigs=numeric(length = length(genomes_rad)),
                           genome_span=numeric(length = length(genomes_rad)),
