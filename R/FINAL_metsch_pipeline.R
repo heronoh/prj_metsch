@@ -28,6 +28,7 @@ library("ggrepel")
 working_dir <- c("/home/heron-oh/metschnikowias/prj_metsh")
 setwd(working_dir)
 
+#teste
 
 
 #inicializando as tabelas e variáveis de genomas
