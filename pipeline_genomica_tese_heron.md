@@ -153,9 +153,6 @@ wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/003/835/GCF_000003835.1_ASM3
 ```
 Extract genome and *.gff*  and rename files to a simpler code (ie: clv)
 
-<<<<<<< HEAD
-![grafico](fig/graph_genome_size.svg)
-
 ``` r
 cat("teste")
 =======
