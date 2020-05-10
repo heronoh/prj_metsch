@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 Yeast genome analysis pipeline used in *Heron Hilário* PhD Thesis
 =======
 *Metschikowia* genome analysis pipeline* 
->>>>>>> 2318e183b330ebf7c13535b2d688b9e007a2d5c5
+
 ================
 #### used in *Heron Hilário* PhD Thesis
 Heron O. Hilário
