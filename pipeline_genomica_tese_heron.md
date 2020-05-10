@@ -1,9 +1,10 @@
 
-Yeast genome analysis pipeline used in *Heron Hilário* PhD Thesis
-=======
+Yeast genome analysis pipeline 
+================
 *Metschikowia* genome analysis pipeline* 
 
 ================
+
 #### used in *Heron Hilário* PhD Thesis
 Heron O. Hilário
 15/03/2020
