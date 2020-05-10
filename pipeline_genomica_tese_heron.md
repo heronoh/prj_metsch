@@ -301,7 +301,7 @@ Use *grep* to count the number of predicted CDSs
 grep -c ">" $genome.all.maker.*.fasta
 ```
 
-Maker CDSs have long bulky names so they were all renamed on *fasta* and *gff*
+Maker CDSs have long bulky names so annotated CDSs must be renamed on *fasta* and *gff*
 
 
 
