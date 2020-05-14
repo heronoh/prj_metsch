@@ -271,7 +271,7 @@ fathom -export 1000 -plus uni.ann uni.dna ;
 forge export.ann export.dna;
 hmm-assembler.pl $genome . > ../$genome.hmm;
 ```
-The generated *$genome.hmm* now replaces the first SNAP HMM profile mado on CEGMA results on the sec.
+The generated *$genome.hmm* now replaces the first SNAP HMM profile made on CEGMA results for the first MAKER2 iteration.
 
 #### **2nd Iteration**
 ##### Generate and fill **MAKER2 config files** and run MAKER2
