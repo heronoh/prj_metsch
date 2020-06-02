@@ -12,19 +12,19 @@ Heron O. Hilário
 This pipeline was adapted and complemented from [github.com/sujaikumar/assemblage](http://github.com/sujaikumar/assemblage), 
 customized for *Metschnikowia australis* and other *Metchnikowia* genomes analysis performed for my PhD Thesis. 
 
-**NOTE: if you wish to run this pipeline for your genomes it is recommended to use up to date versions of the listed programs.
+*NOTE: if you wish to run this pipeline for your genomes it is recommended to use up to date versions of the listed programs.*
 
-**NOTE2: as my mentor Prof. Thiago Mafra always told me, "RTFM" (Read The Friendly Manual).
+*NOTE2: as my mentor Prof. Thiago Mafra always told me, "RTFM" (Read The Friendly Manual).*
 
-**NOTE3: if you are working with many genomes, I advise you to replicate all following commands for all genomes. In order to do so you must rename the assembly files with distinct radicals for each genome, creat a list of the radicals and write with for as the folowing example.
+*NOTE3: if you are working with many genomes, I advise you to replicate all following commands for all genomes. In order to do so you must rename the assembly files with distinct radicals for each genome, creat a list of the radicals and write with for as the folowing example.*
 
 ```bash
 for g in `cat genomes.list`; do echo "$desired_command ${g}.fasta" >> $command.sh
 ```
 
-**By doing so you will ensure reproducibility and also creat a record for the commands you run. I recommend short radicals with the same number of characters. Create and backup a table with the radicals relation to original names, if they are not intuitive.
+*By doing so you will ensure reproducibility and also creat a record for the commands you run. I recommend short radicals with the same number of characters. Create and backup a table with the radicals relation to original names, if they are not intuitive.*
 
-**NOTE4: many steps take a long time. It is wise to use tmux or screen to create virtual sessions.
+*NOTE4: many steps take a long time. It is wise to use tmux or screen to create virtual sessions.*
 
 # Assembly
 ## reads quality assessment, trimming and genome assembly
