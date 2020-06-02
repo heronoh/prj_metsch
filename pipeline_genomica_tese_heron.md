@@ -14,17 +14,17 @@ customized for *Metschnikowia australis* and other *Metchnikowia* genomes analys
 
 __*NOTE: if you wish to run this pipeline for your genomes it is recommended to use up to date versions of the listed programs.*__
 
-__*NOTE2: as my mentor Prof. Thiago Mafra always told me, "RTFM" (Read The Friendly Manual).*
+__*NOTE2: as my mentor Prof. Thiago Mafra always told me, "RTFM" (Read The Friendly Manual).*__
 
-__*NOTE3: if you are working with many genomes, I advise you to replicate all following commands for all genomes. In order to do so you must rename the assembly files with distinct radicals for each genome, creat a list of the radicals and write with for as the folowing example.*
+__*NOTE3: if you are working with many genomes, I advise you to replicate all following commands for all genomes. In order to do so you must rename the assembly files with distinct radicals for each genome, creat a list of the radicals and write with for as the folowing example.*__
 
 ```bash
 for g in `cat genomes.list`; do echo "$desired_command ${g}.fasta" >> $command.sh
 ```
 
-__*By doing so you will ensure reproducibility and also creat a record for the commands you run. I recommend short radicals with the same number of characters. Create and backup a table with the radicals relation to original names, if they are not intuitive.*
+__*By doing so you will ensure reproducibility and also creat a record for the commands you run. I recommend short radicals with the same number of characters. Create and backup a table with the radicals relation to original names, if they are not intuitive.*__
 
-__*NOTE4: many steps take a long time. It is wise to use tmux or screen to create virtual sessions.*
+__*NOTE4: many steps take a long time. It is wise to use tmux or screen to create virtual sessions.*__
 
 # Assembly
 ## reads quality assessment, trimming and genome assembly
