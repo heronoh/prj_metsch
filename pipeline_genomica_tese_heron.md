@@ -19,7 +19,8 @@ __*NOTE2: as my mentor Prof. Thiago Mafra always told me, "RTFM" (Read The Frien
 __*NOTE3: if you are working with many genomes, I advise you to replicate all following commands for all genomes. In order to do so you must rename the assembly files with distinct radicals for each genome, creat a list of the radicals and write with for as the folowing example.*__
 
 ```bash
-for g in `cat genomes.list`; do echo "$desired_command ${g}.fasta" >> $command.sh
+for g in `cat genomes.list`; do echo "$desired_command ${g}.fasta" >> $command.sh; done
+./$command.sh
 ```
 
 __*By doing so you will ensure reproducibility and also creat a record for the commands you run. I recommend short radicals with the same number of characters. Create and backup a table with the radicals relation to original names, if they are not intuitive.*__
