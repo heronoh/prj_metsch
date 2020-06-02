@@ -20,6 +20,7 @@ for g in `cat genomes.list`; do echo "$desired_command ${g}.fasta" >> $command.s
 ```
 By doing so you will ensure reproducibility and also creat a record for the commands you run.
 I recommend short radicals with the same number of characters. Create and backup a table with the radicals relation to original names, if they are not intuitive.
+**NOTE4: many steps take a long time. It is wise to use tmux or screen to create virtual sessions.
 
 # Assembly
 ## reads quality assessment, trimming and genome assembly
