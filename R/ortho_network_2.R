@@ -14,6 +14,7 @@ library(stringr)
 library(ggplot2)
 library(sys)
 library(purrr)
+library(readr)
 
 options(stringsAsFactors = F)
 
@@ -25,6 +26,8 @@ options(stringsAsFactors = F)
 fasta_file <- c("/home/heron/heron-oh-backup_kiko/metschnikowias/2020/orthoMCL/dmd/goodProteins.fasta")
 fmt6_file <- c("/home/heron/metsch/2020/orthoMCL/dmd_sim/36levs_dmd_sim.fmt6")
 
+
+read_csv_chunked()
 
 ## plot the sizes of the proteins in your fasta input so you can choose min alignment
 
@@ -92,11 +95,11 @@ sp2keep <- c("aus","bic","gol","tor","mer","loc","ipo","mau","sim","ari","pro","
 
 length(sp2keep)
 
-                      # sp2remove <- as.array(c("abe","cer","col","con","cub","dek","dra","flo","haw",
-                      #                         "kam","mar","mau","mer","pil","shi","sim","bor","bow",
-                      #                         "cla","ari","cos","ham","hib","ipo","loc","mat","pal",
-                      #                         "pro","sce","sma","kip","clv"))
-                      # sp2keep <- c("aus","bic","gol","tor")
+# sp2remove <- as.array(c("abe","cer","col","con","cub","dek","dra","flo","haw",
+#                         "kam","mar","mau","mer","pil","shi","sim","bor","bow",
+#                         "cla","ari","cos","ham","hib","ipo","loc","mat","pal",
+#                         "pro","sce","sma","kip","clv"))
+# sp2keep <- c("aus","bic","gol","tor")
 
 
 
@@ -139,7 +142,7 @@ for (sp in sp2remove){
 
 grep_sps_out <- c("14levs")
 sp_out_command <- paste0("grep -v ", paste(sps, collapse = "")," ",fmt6_file,
-                                          " > ", res_dir,grep_sps_out,".fmt6")
+                         " > ", res_dir,grep_sps_out,".fmt6")
 
 ### !!!! UNCOMMENT to run !!!!
 #    system(sp_out_command)
@@ -218,7 +221,7 @@ if (remove_auto_hits == TRUE){
   auto_hit_cmd <- paste0("awk '($1 != $2){print}' ",res_dir,m8f_out," > ",
                          res_dir,auto_hit_out)
   ### !!!! UNCOMMENT to run !!!!
-   system(auto_hit_cmd)
+  system(auto_hit_cmd)
 
   csv_input <- paste0(res_dir,auto_hit_out)
   cat(paste0("Genes that only match with themselves (exclusive genes) were REMOVED.
@@ -319,7 +322,7 @@ head(all_nodes)
 
 # add colum for node size , species and genes
 
- all_nodes <- all_nodes %>%
+all_nodes <- all_nodes %>%
   mutate(size = if_else(Class == "gene",1,10))
 
 
@@ -333,65 +336,65 @@ head(all_nodes)
 
 
 
- #como fazer os 1p1p1p1?
+#como fazer os 1p1p1p1?
 
- orths_orthoMCL <- readLines(con = "/home/heron/metsch/2020/potion2/36levs_orthomcl_groups.txt")
-
-
- orths_orthoMCL[1]
-
- grupo <- 1
-
- #criar uma lista para preencher com os IDs dos grupos e ortologos
-
- orths_list <- vector(mode = "list", length = length(orths_orthoMCL))
+orths_orthoMCL <- readLines(con = "/home/heron/metsch/2020/potion2/36levs_orthomcl_groups.txt")
 
 
- for (grupo in 1:length(orths_orthoMCL)) {
+orths_orthoMCL[1]
 
-   # grupo <-20
+grupo <- 1
 
-   group_name <-      str_split(string = orths_orthoMCL[grupo],pattern = ":")[[1]][1]
-   orths_IDs <-  (str_split(string = orths_orthoMCL[grupo],pattern = ":")[[1]][2]) %>%
-     str_remove(" ") %>%
-     str_remove_all("[:alpha:]{3}_") %>%
-     str_split(pattern = " ")
+#criar uma lista para preencher com os IDs dos grupos e ortologos
+
+orths_list <- vector(mode = "list", length = length(orths_orthoMCL))
 
 
+for (grupo in 1:length(orths_orthoMCL)) {
 
-   orths_list[[grupo]][1] <- group_name
-   orths_list[[grupo]][2] <- orths_IDs
-   orths_list[[grupo]][3] <- length(orths_IDs[[1]]) #num genes in group
-   orths_list[[grupo]][4] <- length(unique(str_remove(string = orths_IDs[[1]], #number of species in group
-                                                      pattern = "[:digit:]{4}")))
-   orths_list[[grupo]][5][[1]] <- unique(str_remove(string = orths_IDs[[1]],  #names num species in group
-                                               pattern = "[:digit:]{4}"))
-   orths_list[[grupo]][6] <- if_else((orths_list[[grupo]][[3]] == orths_list[[grupo]][4]),"1p1","n1p1",missing = "PROBLEMA")
-   orths_list[[grupo]][7] <- if_else((orths_list[[grupo]][[4]] == 1),"exclusive","shared",missing = "PROBLEMA")
+  # grupo <-20
 
- }
-
- grupo <-30
- orths_list[[grupo]]
+  group_name <-      str_split(string = orths_orthoMCL[grupo],pattern = ":")[[1]][1]
+  orths_IDs <-  (str_split(string = orths_orthoMCL[grupo],pattern = ":")[[1]][2]) %>%
+    str_remove(" ") %>%
+    str_remove_all("[:alpha:]{3}_") %>%
+    str_split(pattern = " ")
 
 
 
+  orths_list[[grupo]][1] <- group_name
+  orths_list[[grupo]][2] <- orths_IDs
+  orths_list[[grupo]][3] <- length(orths_IDs[[1]]) #num genes in group
+  orths_list[[grupo]][4] <- length(unique(str_remove(string = orths_IDs[[1]], #number of species in group
+                                                     pattern = "[:digit:]{4}")))
+  orths_list[[grupo]][5][[1]] <- unique(str_remove(string = orths_IDs[[1]],  #names num species in group
+                                                   pattern = "[:digit:]{4}"))
+  orths_list[[grupo]][6] <- if_else((orths_list[[grupo]][[3]] == orths_list[[grupo]][4]),"1p1","n1p1",missing = "PROBLEMA")
+  orths_list[[grupo]][7] <- if_else((orths_list[[grupo]][[4]] == 1),"exclusive","shared",missing = "PROBLEMA")
 
- class(orths_list[[grupo]][2])
+}
+
+grupo <-30
+orths_list[[grupo]]
 
 
- for (grupo in 1:length(orths_list)) {
-
-   if (orths_list[[grupo]][[6]] == "1p1"){
-     print(orths_list[[grupo]][[1]])
-   }
- }
 
 
- # for i in nodes table, if  i in genes da list, marcar ele como 1p1 no nodes
+class(orths_list[[grupo]][2])
 
- head(all_nodes)
- tail(all_nodes)
+
+for (grupo in 1:length(orths_list)) {
+
+  if (orths_list[[grupo]][[6]] == "1p1"){
+    print(orths_list[[grupo]][[1]])
+  }
+}
+
+
+# for i in nodes table, if  i in genes da list, marcar ele como 1p1 no nodes
+
+head(all_nodes)
+tail(all_nodes)
 
 # create cols in all_nodes to accomodate orthoMCL data
 all_nodes <- all_nodes %>% mutate(exclusive = as.character(""),
@@ -402,23 +405,23 @@ gene <- 2
 
 
 # all_nodes_bckp <- all_nodes <- all_nodes_bckp
- for (gene in 1:nrow(all_nodes)) {
-   if (all_nodes$Class[gene] == "gene"){
-     for (grupo in 1:length(orths_list)) {
-       if (all_nodes$Id[gene] %in% orths_list[[grupo]][2][[1]]) {
-         all_nodes$paralogs_number[gene] <-  as.numeric(orths_list[[grupo]][3])
-         all_nodes$shrd_by[gene] <-  as.numeric(orths_list[[grupo]][4])
-         all_nodes$single_copy[gene] <- as.character(orths_list[[grupo]][6])
-         all_nodes$exclusive[gene] <- as.character(orths_list[[grupo]][7])
-       }
-     }
-   }else{
-     all_nodes$paralogs_number[gene] <- 0
-     all_nodes$shrd_by[gene] <-  0
-     all_nodes$single_copy[gene] <- "species"
-     all_nodes$exclusive[gene] <- "species"
-   }
- }
+for (gene in 1:nrow(all_nodes)) {
+  if (all_nodes$Class[gene] == "gene"){
+    for (grupo in 1:length(orths_list)) {
+      if (all_nodes$Id[gene] %in% orths_list[[grupo]][2][[1]]) {
+        all_nodes$paralogs_number[gene] <-  as.numeric(orths_list[[grupo]][3])
+        all_nodes$shrd_by[gene] <-  as.numeric(orths_list[[grupo]][4])
+        all_nodes$single_copy[gene] <- as.character(orths_list[[grupo]][6])
+        all_nodes$exclusive[gene] <- as.character(orths_list[[grupo]][7])
+      }
+    }
+  }else{
+    all_nodes$paralogs_number[gene] <- 0
+    all_nodes$shrd_by[gene] <-  0
+    all_nodes$single_copy[gene] <- "species"
+    all_nodes$exclusive[gene] <- "species"
+  }
+}
 
 
 
@@ -463,7 +466,7 @@ head(tab_orths)
 
 ## II.3 Creating all edges
 
-   #     tab_orths_bkp <- tab_orths
+#     tab_orths_bkp <- tab_orths
 #        tab_orths <- tab_orths_bkp
 
 
@@ -526,12 +529,12 @@ tab_orths$align_size
 tab_orths$score <- as.numeric(tab_orths$score)
 tab_orths$align_size <- as.numeric(tab_orths$align_size)
 
-tab_orths %>% mutate(alg_x_sim = as.numeric(score)*align_size) %>% ggplot(aes(x=align_size)) + geom_density()
+tab_orths %>% mutate(alg_x_sim = as.numeric(score)*align_size/100) %>% ggplot(aes(x=align_size)) + geom_density()
 tab_orths %>% mutate(alg_x_sim = as.numeric(score)*align_size) %>% ggplot(aes(x=alg_x_sim)) + geom_density()
 tab_orths %>% mutate(alg_x_sim = as.numeric(score)*align_size) %>% ggplot(aes(x=score)) + geom_density()
 
 
- ### II.3.c write the second output file, "all_edges.csv"
+### II.3.c write the second output file, "all_edges.csv"
 
 
 all_edges_out <- c(paste0(grep_sps_out,"_algn", min_align,"_id",min_id,"_cov",
